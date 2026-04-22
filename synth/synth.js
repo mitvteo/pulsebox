@@ -7762,7 +7762,7 @@ class EnvelopeComputer {
                     case 0 /* RandomEnvelopeTypes.time */:
                         if (step <= 1)
                             return 1;
-                        const timeHash = XXH.h32((perEnvelopeSpeed == 0 ? 0 : Math.floor((timeSinceStart * perEnvelopeSpeed) / (256))) + "", seed);
+                        const timeHash = XXH.h32((perEnvelopeSpeed == 0 ? 0 : Math.floor((timeSinceStart * perEnvelopeSpeed) / (256))) + "", seed)._low;
                         if (inverse) {
                             return perEnvelopeUpperBound - boundAdjust * (step / (step - 1)) * Math.floor(timeHash * step / (hashMax + 1)) / step;
                         }
@@ -7770,7 +7770,7 @@ class EnvelopeComputer {
                             return boundAdjust * (step / (step - 1)) * Math.floor(timeHash * (step) / (hashMax + 1)) / step + perEnvelopeLowerBound;
                         }
                     case 1 /* RandomEnvelopeTypes.pitch */:
-                        const pitchHash = XXH.h32(defaultPitch + "", seed);
+                        const pitchHash = XXH.h32(defaultPitch + "", seed)._low;
                         if (inverse) {
                             return perEnvelopeUpperBound - boundAdjust * pitchHash / (hashMax + 1);
                         }
@@ -7780,7 +7780,7 @@ class EnvelopeComputer {
                     case 2 /* RandomEnvelopeTypes.note */:
                         if (step <= 1)
                             return 1;
-                        const noteHash = XXH.h32(notePinStart + "", seed);
+                        const noteHash = XXH.h32(notePinStart + "", seed)._low;
                         if (inverse) {
                             return perEnvelopeUpperBound - boundAdjust * (step / (step - 1)) * Math.floor(noteHash * step / (hashMax + 1)) / step;
                         }
@@ -7788,8 +7788,8 @@ class EnvelopeComputer {
                             return boundAdjust * (step / (step - 1)) * Math.floor(noteHash * (step) / (hashMax + 1)) / step + perEnvelopeLowerBound;
                         }
                     case 3 /* RandomEnvelopeTypes.timeSmooth */:
-                        const timeHashA = XXH.h32((perEnvelopeSpeed == 0 ? 0 : Math.floor((timeSinceStart * perEnvelopeSpeed) / (256))) + "", seed);
-                        const timeHashB = XXH.h32((perEnvelopeSpeed == 0 ? 0 : Math.floor((timeSinceStart * perEnvelopeSpeed + 256) / (256))) + "", seed);
+                        const timeHashA = XXH.h32((perEnvelopeSpeed == 0 ? 0 : Math.floor((timeSinceStart * perEnvelopeSpeed) / (256))) + "", seed)._low;
+                        const timeHashB = XXH.h32((perEnvelopeSpeed == 0 ? 0 : Math.floor((timeSinceStart * perEnvelopeSpeed + 256) / (256))) + "", seed)._low;
                         const weightedAverage = timeHashA * (1 - ((timeSinceStart * perEnvelopeSpeed) / (256)) % 1) + timeHashB * (((timeSinceStart * perEnvelopeSpeed) / (256)) % 1);
                         if (inverse) {
                             return perEnvelopeUpperBound - boundAdjust * weightedAverage / (hashMax + 1);
