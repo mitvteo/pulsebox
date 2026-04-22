@@ -36,7 +36,7 @@ export class EditorConfig {
         return EditorConfig.presetCategories[0].presets.dictionary?.[TypePresets?.[instrument]];
     }
 }
-EditorConfig.version = "1.0"; // Currently using patch versions in display (unlike JB)
+EditorConfig.version = "0.1"; // Currently using patch versions in display (unlike JB)
 EditorConfig.versionDisplayName = "PulseBox " + EditorConfig.version;
 EditorConfig.releaseNotesURL = "./patch_notes.html";
 EditorConfig.isOnMac = /^Mac/i.test(navigator.platform) || /Mac OS X/i.test(navigator.userAgent) || /^(iPhone|iPad|iPod)/i.test(navigator.platform) || /(iPhone|iPad|iPod)/i.test(navigator.userAgent);
