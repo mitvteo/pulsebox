@@ -15,6 +15,7 @@ window.OFFLINE = false;
 
 doc.synth.song.fromBase64String(window.location.hash);
 
+const ua = navigator.userAgent;
 const favicon = new OffscreenCanvas(256, 256);
 const fctx = favicon.getContext('2d');
 
@@ -122,7 +123,7 @@ setInterval(() => {
     const delta = performance.now() - lastFaviconUpdate;
     rotate(delta / 2000, delta / 2000 * 0.7, delta / 2000 * 0.1);
     updateFavicon();
-}, 250);
+}, ua.indexOf("Firefox") > -1 ? 50 : 250);
 
 const patternsElement = document.getElementById('patterns-auto');
 const oscElement = document.getElementById('osc');
